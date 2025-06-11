@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Surprise Gift!</title>
+  <style>
+    body {
+      background: #fbeee6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      font-family: 'Arial', sans-serif;
+    }
+    #giftBox {
+      width: 150px;
+      height: 150px;
+      background: #ea4c89;
+      border-radius: 20px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      transition: transform 0.2s;
+    }
+    #giftBox:hover {
+      transform: scale(1.05);
+    }
+    #ribbon {
+      position: absolute;
+      top: 60px;
+      left: 45px;
+      width: 60px;
+      height: 30px;
+      background: #ffd700;
+      border-radius: 20px 20px 0 0;
+    }
+    #message, #countdown {
+      margin-top: 30px;
+      font-size: 2em;
+      color: #ea4c89;
+      display: none;
+    }
+    #giftTop {
+      position: absolute;
+      top: -40px;
+      left: 0;
+      width: 150px;
+      height: 40px;
+      background: #ffd700;
+      border-radius: 20px 20px 0 0;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+  <div id="giftBox">
+    <div id="giftTop"></div>
+    <div id="ribbon"></div>
+    <span style="font-size:3em; color:#fff; z-index:2;">🎁</span>
+  </div>
+  <div id="countdown"></div>
+  <div id="message">IT IS TIRUPATI</div>
+
+  <script>
+    const giftBox = document.getElementById('giftBox');
+    const countdown = document.getElementById('countdown');
+    const message = document.getElementById('message');
+    let revealed = false;
+
+    giftBox.addEventListener('click', function() {
+      if (revealed) return;
+      giftBox.style.display = 'none';
+      countdown.style.display = 'block';
+      let n = 3;
+      countdown.textContent = n;
+      let interval = setInterval(() => {
+        n--;
+        if (n > 0) {
+          countdown.textContent = n;
+        } else if (n === 0) {
+          countdown.textContent = 'Go!';
+        } else {
+          clearInterval(interval);
+          countdown.style.display = 'none';
+          message.style.display = 'block';
+          revealed = true;
+        }
+      }, 1000);
+    });
+  </script>
+</body>
+</html>
